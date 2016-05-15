@@ -8,6 +8,5 @@ export default function App({ route }) {
 	</main>;
 }
 App.propTypes = {
-	route: PT.string,
-	setRoute: PT.func.isRequired
+	route: PT.string
 };
