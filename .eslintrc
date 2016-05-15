@@ -1,0 +1,53 @@
+extends:
+- standard
+- plugin:react/recommended
+env:
+    es6: true
+parserOptions:
+    sourceType: module
+plugins:
+- react
+rules:
+    linebreak-style:
+    - error
+    - unix
+    indent:
+    - error
+    - tab
+    max-len:
+    - warn
+    - 90
+    - 4
+    quotes:
+    - error
+    - double
+    - avoid-escape
+    semi:
+    - error
+    - always
+    jsx-quotes:
+    - error
+    - prefer-double
+    no-var:
+    - error
+    no-console:
+    - warn
+    space-before-function-paren:
+    - error
+    - never
+    keyword-spacing:
+    - error
+    - overrides:
+        if: { after: false }
+        for: { after: false }
+        while: { after: false }
+        switch: { after: false }
+    operator-linebreak:
+    - error
+    - after
+    dot-location:
+    - error
+    - object
+    arrow-parens:
+    - error
+    - as-needed
