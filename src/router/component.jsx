@@ -1,12 +1,12 @@
 import React, { PropTypes as PT } from "react";
 
-export default function App({ route }) {
+export default function Router({ route }) {
 	route = route || "default";
 
 	return <main>
 		<p>current route: {JSON.stringify(route)}</p>
 	</main>;
 }
-App.propTypes = {
+Router.propTypes = {
 	route: PT.string
 };

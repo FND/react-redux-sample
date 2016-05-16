@@ -2,7 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import App, { routeReducer } from "./app";
+import Router, { routeReducer } from "./router";
 
 const ROOT = document.querySelector("SampleApp"); // assumes singleton
 const STORE = createStore(routeReducer, {});
@@ -11,7 +11,7 @@ updateRoute();
 window.addEventListener("hashchange", ev => updateRoute());
 
 let app = <Provider store={STORE}>
-	<App />
+	<Router />
 </Provider>;
 render(app, ROOT);
 
