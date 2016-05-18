@@ -9,11 +9,23 @@ let state2props = state => ({
 });
 
 class Provider extends Article {
+	componentWillReceiveProps(newProps) {
+		let articleID = newProps.articleID;
+		if(!newProps.article === undefined || this.props.articleID !== articleID) {
+			this.load(articleID);
+		}
+	}
+
 	componentWillMount() {
-		let { articleID, dispatch } = this.props;
+		this.load(this.props.articleID);
+	}
+
+	load(articleID) {
+		this.props.dispatch({ type: "article-selection", article: null });
+
 		retrieveArticle(articleID).
 			then(article => {
-				dispatch({ type: "article-selection", article });
+				this.props.dispatch({ type: "article-selection", article });
 			});
 	}
 
