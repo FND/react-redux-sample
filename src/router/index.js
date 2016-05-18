@@ -7,12 +7,9 @@ let state2props = state => ({
 
 export default connect(state2props)(Router);
 
-export let routeReducer = (state, action) => {
+export let routeReducer = (state = [], action) => {
 	if(action.type !== "routing") {
 		return state;
 	}
-
-	return Object.assign({}, state, {
-		route: action.route
-	});
+	return action.route;
 };
