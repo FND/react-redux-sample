@@ -3,12 +3,14 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 import { activitiesReducer } from "./activity_stream";
+import { articleReducer } from "./article";
 import Router, { routingReducer } from "./router";
 
 const ROOT = document.querySelector("SampleApp"); // assumes singleton
 const STORE = createStore(combineReducers({
 	routing: routingReducer,
-	activities: activitiesReducer
+	activities: activitiesReducer,
+	article: articleReducer
 }));
 
 updateRoute();

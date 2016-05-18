@@ -9,12 +9,11 @@ const ROUTES = {
 	article: Article
 };
 
-export default function Router({ view, params }) {
+export default function Router({ view }) {
 	let component = view && ROUTES[view];
-	return component ? createElement(component, { routingParams: params }) :
+	return component ? createElement(component) :
 			<p>failed to render view '{view}'</p>;
 }
 Router.propTypes = {
-	view: PT.string,
-	params: PT.arrayOf(PT.string)
+	view: PT.string
 };
