@@ -3,7 +3,6 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 import { activitiesReducer } from "./activity_stream";
-import retrieveActivities from "./activity_stream/service";
 import Router, { routingReducer } from "./router";
 
 const ROOT = document.querySelector("SampleApp"); // assumes singleton
@@ -19,11 +18,6 @@ let app = <Provider store={STORE}>
 	<Router />
 </Provider>;
 render(app, ROOT);
-
-retrieveActivities().
-	then(activities => {
-		STORE.dispatch({ type: "activities", activities });
-	});
 
 // TODO: use `store.subscribe` to auto-update
 function setRoute(route) {
