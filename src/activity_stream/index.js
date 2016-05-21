@@ -6,16 +6,22 @@ let state2props = state => ({
 	entries: state.activities
 });
 
-class Provider extends ActivityStream {
-	componentWillMount() {
+let dispatch2props = dispatch => ({
+	onInit: () => {
 		retrieveActivities().
 			then(activities => {
-				this.props.dispatch({ type: "activities", activities });
+				dispatch({ type: "activities", activities });
 			});
+	}
+});
+
+class Provider extends ActivityStream {
+	componentWillMount() {
+		this.props.onInit();
 	}
 }
 
-export default connect(state2props)(Provider);
+export default connect(state2props, dispatch2props)(Provider);
 
 export let activitiesReducer = (state = [], action) => {
 	if(action.type !== "activities") {

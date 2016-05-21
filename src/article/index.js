@@ -8,25 +8,27 @@ let state2props = state => ({
 	article: state.article
 });
 
+let dispatch2props = dispatch => ({
+	onInit: articleID => {
+		dispatch({ type: "article-selection", article: null });
+
+		retrieveArticle(articleID).
+			then(article => {
+				dispatch({ type: "article-selection", article });
+			});
+	}
+});
+
 class Provider extends Article {
 	componentWillReceiveProps(newProps) {
 		let articleID = newProps.articleID;
 		if(!newProps.article === undefined || this.props.articleID !== articleID) {
-			this.load(articleID);
+			this.props.onInit(articleID);
 		}
 	}
 
 	componentWillMount() {
-		this.load(this.props.articleID);
-	}
-
-	load(articleID) {
-		this.props.dispatch({ type: "article-selection", article: null });
-
-		retrieveArticle(articleID).
-			then(article => {
-				this.props.dispatch({ type: "article-selection", article });
-			});
+		this.props.onInit(this.props.articleID);
 	}
 
 	render() {
@@ -35,7 +37,7 @@ class Provider extends Article {
 	}
 }
 
-export default connect(state2props)(Provider);
+export default connect(state2props, dispatch2props)(Provider);
 
 export let articleReducer = (state = null, action) => {
 	if(action.type !== "article-selection") {
