@@ -1,6 +1,7 @@
 import React, { createElement, PropTypes as PT } from "react";
 import ActivityStream from "../activity_stream";
 import Article from "../article";
+import Favorites from "../favorites";
 
 const ROUTES = {
 	// …[#]
@@ -11,8 +12,15 @@ const ROUTES = {
 
 export default function Router({ view }) {
 	let component = view && ROUTES[view];
-	return component ? createElement(component) :
-			<p>failed to render view '{view}'</p>;
+	if(!component) {
+		return <p>failed to render view '{view}'</p>;
+	}
+
+	return <main>
+		<Favorites />
+
+		{createElement(component)}
+	</main>;
 }
 Router.propTypes = {
 	view: PT.string
