@@ -10,7 +10,9 @@ export default class ActivityStream extends Component {
 			<p>no new items</p> :
 			<ol>
 				{entries.map(entry => {
-					return <StreamEntry key={entry.id} entry={entry} />;
+					return <li key={entry.id}>
+						<StreamEntry entry={entry} />
+					</li>;
 				})}
 			</ol>;
 
