@@ -12,6 +12,9 @@ let dispatch2props = dispatch => ({
 			then(activities => {
 				dispatch({ type: "activities", activities });
 			});
+	},
+	onSelectFavorite: entryID => {
+		dispatch({ type: "activity-favorite", entryID });
 	}
 });
 
@@ -24,8 +27,16 @@ class Provider extends ActivityStream {
 export default connect(state2props, dispatch2props)(Provider);
 
 export let activitiesReducer = (state = [], action) => {
-	if(action.type !== "activities") {
+	switch(action.type) {
+	case "activities": // TODO: rename
+		return action.activities;
+	case "activity-favorite":
+		let id = action.entryID;
+		// XXX: inefficient
+		return state.map(entry => entry.id !== id ? entry : entry.clone({
+			favorite: true
+		}));
+	default:
 		return state;
 	}
-	return action.activities;
 };
