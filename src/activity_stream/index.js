@@ -13,8 +13,8 @@ let dispatch2props = dispatch => ({
 				dispatch({ type: "activities", activities });
 			});
 	},
-	onSelectFavorite: entryID => {
-		dispatch({ type: "activity-favorite", entryID });
+	onToggleFavorite: entryID => {
+		dispatch({ type: "toggle-favorite", entryID });
 	}
 });
 
@@ -30,11 +30,11 @@ export let activitiesReducer = (state = [], action) => {
 	switch(action.type) {
 	case "activities": // TODO: rename
 		return action.activities;
-	case "activity-favorite":
+	case "toggle-favorite":
 		let id = action.entryID;
 		// XXX: inefficient
 		return state.map(entry => entry.id !== id ? entry : entry.clone({
-			favorite: true
+			favorite: !entry.favorite
 		}));
 	default:
 		return state;

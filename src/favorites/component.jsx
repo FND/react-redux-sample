@@ -6,13 +6,13 @@ import * as models from "../activity_stream/models";
 // NB: constitutes a class to allow for inheritance
 export default class Favorites extends Component {
 	render() {
-		let { entries } = this.props;
+		let { entries, onToggleFavorite } = this.props;
 		let content = entries.length === 0 ?
 			<p>no favorites</p> :
 			<ol>
 				{entries.map(entry => {
 					return <li key={entry.id}>
-						<StreamEntry entry={entry} />
+						<StreamEntry entry={entry} onSelect={onToggleFavorite} />
 					</li>;
 				})}
 			</ol>;
@@ -24,5 +24,6 @@ export default class Favorites extends Component {
 	}
 }
 Favorites.propTypes = {
-	entries: PT.arrayOf(PT.instanceOf(models.StreamEntry)).isRequired
+	entries: PT.arrayOf(PT.instanceOf(models.StreamEntry)).isRequired,
+	onToggleFavorite: PT.func.isRequired
 };
