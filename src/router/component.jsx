@@ -2,6 +2,7 @@ import React, { createElement, PropTypes as PT } from "react";
 import ActivityStream from "../activity_stream";
 import Article from "../article";
 import Favorites from "../favorites";
+import ContextMenu from "../context_menu";
 
 const ROUTES = {
 	// …[#]
@@ -18,8 +19,8 @@ export default function Router({ view }) {
 
 	return <main>
 		{createElement(component)}
-
 		<Favorites />
+		<ContextMenu />
 	</main>;
 }
 Router.propTypes = {
