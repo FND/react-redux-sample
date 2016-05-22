@@ -4,15 +4,21 @@ import * as models from "./models";
 export default function StreamEntry({ entry, onSelect }) {
 	let { desc, articleID } = entry;
 	let uri = `#article/${articleID}`;
-	let styles = entry.favorite ? null : { opacity: 0.2 }; // XXX: crude
+
+	let cls = "activity";
+	if(entry.favorite) {
+		cls += " favorite";
+	}
+
 	let onClick = onSelect === undefined ? null : ev => {
 		onSelect(entry.id);
 	};
-	return <div>
-		<button style={styles} onClick={onClick}>⭐️</button>
+
+	return <article className={cls}>
+		<button onClick={onClick}>⭐️</button>
 		{" "}
 		<a href={uri}>{desc}</a>
-	</div>;
+	</article>;
 }
 StreamEntry.propTypes = {
 	entry: PT.instanceOf(models.StreamEntry).isRequired,

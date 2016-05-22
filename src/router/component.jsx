@@ -17,9 +17,9 @@ export default function Router({ view }) {
 	}
 
 	return <main>
-		<Favorites />
-
 		{createElement(component)}
+
+		<Favorites />
 	</main>;
 }
 Router.propTypes = {

@@ -8,7 +8,7 @@ export default class ActivityStream extends Component {
 		let { entries, onToggleFavorite } = this.props;
 		let content = entries.length === 0 ?
 			<p>no new items</p> :
-			<ol>
+			<ol className="list-group">
 				{entries.map(entry => {
 					return <li key={entry.id}>
 						<StreamEntry entry={entry} onSelect={onToggleFavorite} />
