@@ -7,6 +7,17 @@ let state2props = state => {
 		caption: "home",
 		uri: "#"
 	}];
+
+	if(view === "article") {
+		let { current, editing } = state.article;
+		if(current && !editing) {
+			items.push({
+				caption: "✎ edit",
+				action: "onEditArticle"
+			});
+		}
+	}
+
 	return { items };
 };
 

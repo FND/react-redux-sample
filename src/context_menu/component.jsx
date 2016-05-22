@@ -8,8 +8,9 @@ export default class ContextMenu extends Component {
 			<h3>Context Menu</h3>
 			<ul>
 				{items.map((item, i) => {
+					let action = item.action && this.props[item.action];
 					return <li key={i}>
-						<MenuItem {...item} />
+						<MenuItem {...item} action={action} />
 					</li>;
 				})}
 			</ul>
@@ -21,10 +22,13 @@ ContextMenu.propTypes = {
 };
 
 function MenuItem(props) {
-	let { caption, uri } = props;
-	return <a href={uri}>{caption}</a>;
+	let { caption, action, uri } = props;
+	return uri ?
+			<a href={uri}>{caption}</a> :
+			<button onClick={action}>{caption}</button>;
 }
 MenuItem.propTypes = {
 	caption: PT.string.isRequired,
+	action: PT.func,
 	uri: PT.string
 };

@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import Article from "./component";
 import retrieveArticle from "./service";
 
-let state2props = state => ({
-	articleID: state.routing.params[0],
-	article: state.article
+let state2props = ({ routing, article }) => ({
+	articleID: routing.params[0],
+	article: article.current,
+	editing: article.editing
 });
 
 let dispatch2props = dispatch => ({
@@ -39,9 +40,15 @@ class Provider extends Article {
 
 export default connect(state2props, dispatch2props)(Provider);
 
-export let articleReducer = (state = null, action) => {
-	if(action.type !== "article-selection") {
+export let articleReducer = (state = {}, action) => {
+	switch(action.type) { // TODO: rename actions for consistency
+	case "article-selection":
+		return { current: action.article };
+	case "edit-article":
+		return Object.assign({}, state, {
+			editing: true
+		});
+	default:
 		return state;
 	}
-	return action.article;
 };
